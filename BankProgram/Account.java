@@ -1,69 +1,66 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Account {
+	String name;
+	int accountnumber;
+	double balance;
+	double amount;
+	
+	Scanner scan = new Scanner(System.in);
 
-	private double balance;
-	private int accountNumber;
-	private String name;
-	
-	Bank account = new Bank();
-	
-	public void getAccountName(String name) {
+	Account(int acctnum, double balance, String name) {
+		this.accountnumber = acctnum;
+		this.balance = balance;
 		this.name = name;
 	}
 	
-	public void getbalance(double balance) {
+	void setaccountname(String name) {
+		this.name = name;
+	}
+	void setaccountnumber(int accountnumber) {
+		this.accountnumber = accountnumber;
+	}
+	void setbalance(double balance) {
 		this.balance = balance;
 	}
 	
-	public void getaccountNumber(int accountNumber) {
-		this.accountNumber = accountNumber;
+	int getaccountnumber() {
+		return accountnumber;
+	}
+	double getbalance() {
+		return balance;
+	}
+	String getname() {
+		return name;
 	}
 	
-	public double deposit (int accountNumber, double amt) {
+	public void deposit(double amount){
 		
-		int index = Bank.acctNums.indexOf(accountNumber);
-		
-		System.out.println("Account Number: "+ accountNumber);
-		System.out.println("Name: " + Bank.acctNam.get(index));
-		System.out.println("Account Balance: " + Bank.acctblc.get(index));
-		
-		 Bank.acctblc.set(index, Bank.acctblc.get(index)+ amt);
-		 
-		 return (double) Bank.acctblc.get(index);
+		balance+=amount;
+		System.out.println("Account Number: " + accountnumber);
+		System.out.println("Account Name: " + name);
+		System.out.println("New Balance: " + balance+" \n");
 	}
 	
-	public double withdraw (int accountNumber, double amt) {
-		
-		int index = Bank.acctNums.indexOf(accountNumber);
-		
-		System.out.println("Account Number: "+ accountNumber);
-		System.out.println("Name: " + Bank.acctNam.get(index));
-		System.out.println("Account Balance: " + Bank.acctblc.get(index));
-		
-		Bank.acctblc.set(index, Bank.acctblc.get(index)- amt);
-		
-		return (double) Bank.acctblc.get(index);
-	}
-	
-	public void displayOneAcct(int accountNumber) {
-		int index = 0;
-		
-		index = Bank.acctNums.indexOf(accountNumber);
-		
-		System.out.println("--------------------------------------");
-		System.out.println("Account Number: " + accountNumber );
-		System.out.println("Name: " + Bank.acctNam.get(index));
-		System.out.println("Balance: " + Bank.acctblc.get(index));
-		System.out.println("--------------------------------------");
-		
-		
+	public void withdraw(double amount){
+		balance-=amount;
+		System.out.println("Account Number: " + accountnumber);
+		System.out.println("Account Name: " + name);
+		System.out.println("New Balance: " + balance+" \n");
 		
 		
 	}
 	
-	
+	public void displayAccount() {
+		
+		System.out.println("------------------------------------");
+		System.out.println("Account Number: " + accountnumber);
+		System.out.println("Account Name: " + name );
+		System.out.println("Account Balance: " + balance);
+		System.out.println("------------------------------------");
+
+		
+	}
 	
 	
 }
