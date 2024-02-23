@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Account {
 	String name;
@@ -6,8 +5,6 @@ public class Account {
 	double balance;
 	double amount;
 	
-	Scanner scan = new Scanner(System.in);
-
 	Account(int acctnum, double balance, String name) {
 		this.accountnumber = acctnum;
 		this.balance = balance;
