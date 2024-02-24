@@ -1,13 +1,11 @@
 import java.util.Scanner;
 
-
 public class Bank {
 
 	public static Account[] accountsArray;
 
 	public static void main(String[] args) {
 
-		
 		final int REGISTER_ACTION = 1;
 		final int DEPOSTI_ACTION = 2;
 		final int WITHDRAW_ACTION = 3;
@@ -60,93 +58,65 @@ public class Bank {
 				System.out.println("Enter amount to deposit: ");
 				double amount = scan.nextDouble();
 
-				for (int i = 0; i < accounts; i++) {
-					int acct = accountsArray[i].getaccountnumber();
-
-					if (acct == acctnum) {
-						accountsArray[i].deposit(amount);
-					}
-				} 
+				search_with_deposit(accounts, acctnum, amount);
 
 				break;
 
 			}
+
 			case WITHDRAW_ACTION: {
-				
+
 				System.out.println("Enter account number to withdraw: ");
 				int acctnum = scan.nextInt();
 				System.out.println("Enter amount to withdraw: ");
 				double amount = scan.nextDouble();
 
-				for (int i = 0; i < accounts; i++) {
-					int acct = accountsArray[i].getaccountnumber();
+				search_with_withdraw(accounts, acctnum, amount);
 
-					if (acct == acctnum) {
-						System.out.println();
-						accountsArray[i].withdraw(amount);;
-					}
-				}
-				
 				break;
 
 			}
+
 			case TRANSFER_ACTION: {
-				
+
 				System.out.println("Enter amount to transfer: ");
 				double amount = scan.nextDouble();
 				System.out.println("Enter the sending account: ");
 				int fromAccount = scan.nextInt();
 				System.out.println("Enter the reciving account: ");
 				int toAccount = scan.nextInt();
-				
-				for (int i = 0; i < accounts; i++) {
 
-					if (fromAccount == accountsArray[i].getaccountnumber()) {
-						System.out.println();
-						accountsArray[i].withdraw(amount);;
-					}
-				}
-				
-				for (int i = 0; i < accounts; i++) {
-				
-					if (toAccount == accountsArray[i].getaccountnumber() ) {
-						System.out.println();
-						accountsArray[i].deposit(amount);
-					}
-				}
-				
+				search_with_withdraw(accounts, fromAccount, amount);
+
+				search_with_deposit(accounts, toAccount, amount);
+
 				break;
-
 			}
+
 			case DISPLAY_AN_ACCOUNT_ACTION: {
 				System.out.println("Enter account number to display account: ");
 				int accountnumber = scan.nextInt();
-				
-				for(int i = 0; i < accounts; i++) {
-					if (accountnumber == accountsArray[i].getaccountnumber()) {
-						System.out.println();
-						accountsArray[i].displayAccount();;
-					}
-				}
+
+				display_account(accounts, accountnumber);
 
 				break;
 
 			}
+
 			case DISPLAY_ALL_ACCOUNTS_ACTION: {
-				
-				for(int i = 0; i < accounts; i++) {
-					
-					accountsArray[i].displayAccount();
-				}
+
+				display_all_accounts(accounts);
+
 				break;
 
 			}
+
 			case CALCULATE_A_LOAN_ACTION: {
-				
+
 				break;
 
 			}
-			
+
 			default: {
 				System.out.println("Invalid input. Try again");
 				break;
@@ -184,6 +154,46 @@ public class Bank {
 		System.out.println("6. Display All Accounts.");
 		System.out.println("7. Calculate a Loan.\n");
 		System.out.println("Pick a a Service by the number. Enter 0 to exit: ");
+	}
+
+	public static void search_with_deposit(int accounts, int acctnum, double amount) {
+		for (int i = 0; i < accounts; i++) {
+			int acct = accountsArray[i].getaccountnumber();
+
+			if (acct == acctnum) {
+				accountsArray[i].deposit(amount);
+			}
+		}
+	}
+
+	public static void search_with_withdraw(int accounts, int acctnum, double amount) {
+		for (int i = 0; i < accounts; i++) {
+			int acct = accountsArray[i].getaccountnumber();
+
+			if (acct == acctnum) {
+				System.out.println();
+				accountsArray[i].withdraw(amount);
+
+			}
+		}
+	}
+
+	public static void display_account(int accounts, int accountnumber) {
+		for (int i = 0; i < accounts; i++) {
+			if (accountnumber == accountsArray[i].getaccountnumber()) {
+				System.out.println();
+				accountsArray[i].displayAccount();
+
+			}
+		}
+
+	}
+
+	public static void display_all_accounts(int accounts) {
+		for (int i = 0; i < accounts; i++) {
+
+			accountsArray[i].displayAccount();
+		}
 	}
 
 }
