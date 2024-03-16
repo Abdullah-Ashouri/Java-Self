@@ -112,7 +112,34 @@ public class Bank {
 			}
 
 			case CALCULATE_A_LOAN_ACTION: {
-
+				
+				
+				System.out.println("Enter your credit score: ");
+				int creditScore = scan.nextInt();
+				System.out.println("Enter loan amount: ");
+				double loanAmount = scan.nextDouble();
+				System.out.println("Enter loan term in months: ");
+				int monthsToPay = scan.nextInt();
+				
+				
+				double interestRate = get_Interest_Rate(creditScore);
+				
+				System.out.println("Interest Rate: " + interestRate);
+				
+				Loan loan = new Loan(loanAmount,monthsToPay,interestRate);
+				
+				double tenPercentOfTotals = total_balances_in_bank() * 0.1;
+				
+				if (tenPercentOfTotals > loanAmount) {
+					
+					System.out.println("Great we can offer you a loan.");
+					System.out.printf("Your monthly payment is: %.2f\n" , loan.interestRateCalculated());
+					
+				}else {
+					System.out.println("Unfortunatly we are unable to offer you a loan for that amount.");
+				}
+				
+				
 				break;
 
 			}
@@ -121,7 +148,7 @@ public class Bank {
 				System.out.println("Invalid input. Try again");
 				break;
 
-			}
+				}
 			}
 
 			menu_with_termination();
@@ -141,7 +168,7 @@ public class Bank {
 		System.out.println("5. Display An Account.");
 		System.out.println("6. Display All Accounts.");
 		System.out.println("7. Calculate a Loan.\n");
-		System.out.println("Pick a a Service by the number: ");
+		System.out.println("Pick a Service by the number: ");
 	}
 
 	public static void menu_with_termination() {
@@ -194,6 +221,56 @@ public class Bank {
 
 			accountsArray[i].displayAccount();
 		}
+	}
+	
+	public static double total_balances_in_bank() {
+		double totalBalance = 0;
+		
+		for(int i = 0; i < accountsArray.length; i++) {
+			totalBalance += accountsArray[i].getbalance();
+		}
+		
+		return totalBalance;
+		
+	}
+	
+	public static double get_Interest_Rate(int creditScore) {
+		
+		double interestRate = 0;
+		
+		switch(creditScore/100) {
+			case 10:
+			case 9: {
+				interestRate = 3.50;
+				break;
+			}
+			case 8: {
+					interestRate = 4.00;
+				break;
+			}
+			case 7: {
+					interestRate = 4.50;
+				break;
+			}
+			case 6: {
+					interestRate = 5.00;
+				break;
+			}
+			case 5: 
+			case 4:
+			case 3:
+			case 2:
+			case 1: {
+				interestRate = 6.00;
+				break;
+			}
+			default: {
+				System.out.println("Not a valid Score");
+				break;
+			}
+			
+		}
+		return interestRate;
 	}
 
 }
